@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import pokemon from "pokemontcgsdk";
+import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../Imgs/pokeLogo.jpg";
 import useEmblaCarousel from "embla-carousel-react";
 
@@ -15,6 +16,9 @@ const LandingPage = () => {
     "swsh9-",
     "sv8pt5-",
   ];
+
+  const { loginWithRedirect, isAuthenticated, logout,  } =
+    useAuth0();
 
   const pokeSets = [];
 
@@ -75,28 +79,50 @@ const LandingPage = () => {
         <div className="basis-full text-center text-purple-500 font-body text-5xl">
           Royalty Poke Shop
         </div>
-        <div className="basis-full text-right"> login button</div>
+
+        <div className="basis-full text-right">
+          {!isAuthenticated ? (
+            <button
+              onClick={() => loginWithRedirect()}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Log In
+            </button>
+          ) : (
+            <>
+              <button
+                onClick={() => logout({ returnTo: window.location.origin })}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Log Out
+              </button>
+            </>
+          )}
+        </div>
       </header>
 
       <section className="bg-pink-500 h-72 flex flex-row justify-center items-center">
-        <div className="flex flex-row gap-4 items-center justify-center embla" ref={emblaRef}>
-              {images[0] ? (
-                <img className="h-64" src={images[0]} alt="Pokémon Card 1" />
-              ) : (
-                <div>Loading…</div>
-              )}
+        <div
+          className="flex flex-row gap-4 items-center justify-center embla"
+          ref={emblaRef}
+        >
+          {images[0] ? (
+            <img className="h-64" src={images[0]} alt="Pokémon Card 1" />
+          ) : (
+            <div>Loading…</div>
+          )}
 
-              {images[1] ? (
-                <img className="h-64" src={images[1]} alt="Pokémon Card 2" />
-              ) : (
-                <div>Loading…</div>
-              )}
+          {images[1] ? (
+            <img className="h-64" src={images[1]} alt="Pokémon Card 2" />
+          ) : (
+            <div>Loading…</div>
+          )}
 
-              {images[2] ? (
-                <img className="h-64" src={images[2]} alt="Pokémon Card 3" />
-              ) : (
-                <div>Loading…</div>
-              )}
+          {images[2] ? (
+            <img className="h-64" src={images[2]} alt="Pokémon Card 3" />
+          ) : (
+            <div>Loading…</div>
+          )}
         </div>
       </section>
 
