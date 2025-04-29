@@ -1,21 +1,58 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import logo from "../Imgs/pokeLogo.jpg";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
-
   const { user, logout } = useAuth0();
 
   return (
     <div className="min-h-full">
-      <div className="flex flex-row gap 4 bg-teal-100">
+      <div className="flex flex-row gap 4 bg-fuchsia-600">
         <div className="text-left basis-full">
           <div className="flex flex-row">
             <img className="rounded-full h-16 w-18" src={logo} alt="pokeLogo" />
             <div className="flex flex-row pt-4 pl-4 gap-4">
-              <div className="text-cyan-200 bg-gray-900 rounded opacity-75 h-8 w-full text-center">Home Page</div>
-              <div>Settings</div>
-              <div>Market</div>
+              <NavLink to="/home" style={{ backgroundColor: "red" }} />
+              <NavLink
+                to="/home"
+                style={({ isActive, isPending }) => ({
+                  backgroundColor: isActive ? "black" : isPending ? "" : "",
+
+                  height: isActive ? 32 : isPending ? "" : "",
+
+                  width: isActive ? 58 : isPending ? "" : "",
+
+                  borderRadius: isActive ? 25 : isPending ? "" : "",
+
+                  color: isActive? "white" : isPending ? "" : "",
+                })}
+              >
+                <div className="text-teal-400 rounded h-8 w-full text-center font-semibold">
+                  Home
+                </div>
+              </NavLink>
+
+              <NavLink to="/market" style={{ backgroundColor: "red" }} />
+              <NavLink
+                to="/market"
+                style={({ isActive, isPending }) => ({
+                  backgroundColor: isActive ? "black" : isPending ? "" : "",
+
+                  height: isActive ? 32 : isPending ? "" : "",
+
+                  width: isActive ? 64 : isPending ? "" : "",
+
+                  borderRadius: isActive ? 25 : isPending ? "" : "",
+
+                  color: isActive? "white" : isPending ? "" : "",
+                })}
+              >
+                <div className="text-teal-400 rounded h-8 w-full text-center font-semibold">
+                  Market
+                </div>
+              </NavLink>
             </div>
           </div>
         </div>
