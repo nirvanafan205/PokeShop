@@ -7,7 +7,8 @@ module.exports = {
         body: ["Ms Madi"],
       },
       backgroundImage: {
-        banner: 'url("/src/Imgs/banner.jpg")',
+        banner: 'url("/src/Imgs/multipoke.jpg")',
+        pokeBanner: 'url("/src/Imgs/pokemonDisplay.jpg")',
       },
     },
   },

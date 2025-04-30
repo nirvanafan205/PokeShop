@@ -26,7 +26,7 @@ const Navbar = () => {
 
                   borderRadius: isActive ? 25 : isPending ? "" : "",
 
-                  color: isActive? "white" : isPending ? "" : "",
+                  color: isActive ? "white" : isPending ? "" : "",
                 })}
               >
                 <div className="text-teal-400 rounded h-8 w-full text-center font-semibold">
@@ -46,7 +46,7 @@ const Navbar = () => {
 
                   borderRadius: isActive ? 25 : isPending ? "" : "",
 
-                  color: isActive? "white" : isPending ? "" : "",
+                  color: isActive ? "white" : isPending ? "" : "",
                 })}
               >
                 <div className="text-teal-400 rounded h-8 w-full text-center font-semibold">

@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import pokemon from "pokemontcgsdk";
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from "../Imgs/pokeLogo.jpg";
+import evoskies from "../Imgs/evolingSkies.png";
+import stars from "../Imgs/brilliantStars.png";
+import eclipes from "../Imgs/cosmicEclipes.png";
+import stellar from "../Imgs/stellarCrown.png";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const LandingPage = () => {
   const [images, setImages] = useState([]);
@@ -17,10 +22,13 @@ const LandingPage = () => {
     "sv8pt5-",
   ];
 
-  const { loginWithRedirect, isAuthenticated, logout,  } =
-    useAuth0();
+  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
 
   const pokeSets = [];
+
+  const [emblaRef] = useEmblaCarousel({ loop: true, align: "center" }, [
+    Autoplay({ delay: 2800, stopOnInteraction: false }),
+  ]);
 
   function pokeSet() {
     const series = pokemonSet;
@@ -42,8 +50,6 @@ const LandingPage = () => {
   }
 
   pokeSet();
-
-  const [emblaRef] = useEmblaCarousel();
 
   useEffect(() => {
     // Access the API key from the environment variables.
@@ -101,32 +107,53 @@ const LandingPage = () => {
         </div>
       </header>
 
-      <section className="bg-pink-500 h-72 flex flex-row justify-center items-center">
-        <div
-          className="flex flex-row gap-4 items-center justify-center embla"
-          ref={emblaRef}
-        >
-          {images[0] ? (
-            <img className="h-64" src={images[0]} alt="Pokémon Card 1" />
-          ) : (
-            <div>Loading…</div>
-          )}
+      <section className="bg-fuchsia-400 h-64 flex justify-center items-center">
+        <div className="text-center">
+          <h2>Welcome to Royalty Poke Shop!</h2>
+          <h1 className="font-bold animate-pulse">WE'LL BUY YOUR SINGLE AND SEALED PRODUCTS!</h1>
+          <h2>Come and look at what we have to offer!</h2>
+        </div>
+        <div className="overflow-hidden w-full max-w-lg" ref={emblaRef}>
+          <div className="flex">
+            {images.map((src, i) => (
+              <div key={i} className="flex-[0_0_100%] p-2">
+                <img
+                  src={src}
+                  alt={`Pokémon card ${i + 1}`}
+                  className="h-64 mx-auto select-none pointer-events-none"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="text-center flex flex-col gap-8">
+          <img
+            className="rounded-full h-24 w-18 "
+            src={evoskies}
+            alt="pokeLogo"
+          />
+          <img
+            className="rounded-full h-24 w-18"
+            src={eclipes}
+            alt="pokeLogo"
+          />
+        </div>
 
-          {images[1] ? (
-            <img className="h-64" src={images[1]} alt="Pokémon Card 2" />
-          ) : (
-            <div>Loading…</div>
-          )}
-
-          {images[2] ? (
-            <img className="h-64" src={images[2]} alt="Pokémon Card 3" />
-          ) : (
-            <div>Loading…</div>
-          )}
+        <div className="text-center flex flex-col gap-8">
+          <img
+            className="rounded-full h-24 w-18 "
+            src={stars}
+            alt="pokeLogo"
+          />
+          <img
+            className="rounded-full h-24 w-18"
+            src={stellar}
+            alt="pokeLogo"
+          />
         </div>
       </section>
 
-      <footer className="bg-banner bg-cover bg-center h-48"></footer>
+      <footer className="bg-banner bg-cover bg-center h-64"></footer>
     </>
   );
 };
